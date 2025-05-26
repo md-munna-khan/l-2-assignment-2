@@ -91,14 +91,15 @@ WHERE extract  (YEAR FROM discovery_date  ) < 1800
 --problem 8️⃣ Label each sighting's time of day as 'Morning', 'Afternoon', or 'Evening'.
 
 
-SELECT
-sighting_id,
-CASE 
-    WHEN extract(HOUR FROM sighting_time) < 12 then 'Morning'
+SELECT 
+  sighting_id,
+  CASE
+    WHEN extract(HOUR FROM sighting_time) < 12 THEN 'Morning'
     WHEN extract(HOUR FROM sighting_time) BETWEEN 12 AND 17 THEN 'Afternoon'
-    WHEN extract(HOUR FROM sighting_time) > 16 then 'Evening'
-END as time_of_day
-FROM sightings;
+    ELSE 'Evening'
+  END AS time_of_day
+FROM sightings ORDER BY sighting_id;
+
 
 
 
@@ -110,5 +111,24 @@ WHERE NOT EXISTS (
   FROM sightings 
   WHERE sightings.ranger_id = rangers.ranger_id
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
